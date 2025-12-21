@@ -45,5 +45,16 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<!-- File sharing permissions for PDF export -->
+	<key>UIFileSharingEnabled</key>
+	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
+	<!-- Photo library permission for saving exports -->
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app needs access to save exported invoices and estimates.</string>
+	<!-- Document picker permission -->
+	<key>UISupportsDocumentBrowser</key>
+	<true/>
 </dict>
 </plist>
