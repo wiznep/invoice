@@ -53,7 +53,7 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
     final dateFormat = DateFormat('MMM d, yyyy');
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      
       appBar: AppBar(title: Text(isEditing ? 'Edit Invoice' : 'New Invoice')),
       body: Form(
         key: _formKey,
@@ -92,7 +92,7 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
               child: Container(
                 padding: const EdgeInsets.all(AppSpacing.md),
                 decoration: BoxDecoration(
-                  color: AppColors.surfaceVariant,
+                  color: AppColors.getSurfaceVariant(context),
                   borderRadius: BorderRadius.circular(AppRadius.md),
                 ),
                 child: Row(
@@ -127,9 +127,9 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
             Container(
               padding: const EdgeInsets.all(AppSpacing.md),
               decoration: BoxDecoration(
-                color: AppColors.surface,
+                color: AppColors.getSurface(context),
                 borderRadius: BorderRadius.circular(AppRadius.md),
-                border: Border.all(color: AppColors.border),
+                border: Border.all(color: AppColors.getBorder(context)),
               ),
               child: Column(
                 children: [
@@ -174,7 +174,7 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
   Widget _buildSectionTitle(String title) {
     return Text(
       title,
-      style: AppTypography.labelLarge.copyWith(color: AppColors.textPrimary),
+      style: AppTypography.labelLarge.copyWith(color: AppColors.getTextPrimary(context)),
     );
   }
 
@@ -186,7 +186,7 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
       child: Container(
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          color: AppColors.surfaceVariant,
+          color: AppColors.getSurfaceVariant(context),
           borderRadius: BorderRadius.circular(AppRadius.md),
           border: _selectedClient == null
               ? Border.all(color: AppColors.error.withOpacity(0.5))
@@ -221,7 +221,7 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
                           Text(
                             _selectedClient!.email!,
                             style: AppTypography.bodySmall.copyWith(
-                              color: AppColors.textSecondary,
+                              color: AppColors.getTextSecondary(context),
                             ),
                           ),
                       ],
@@ -231,7 +231,7 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
                           ? 'Add a client first'
                           : 'Select a client',
                       style: AppTypography.bodyMedium.copyWith(
-                        color: AppColors.textSecondary,
+                        color: AppColors.getTextSecondary(context),
                       ),
                     ),
             ),
@@ -247,7 +247,7 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
       return Container(
         padding: const EdgeInsets.all(AppSpacing.lg),
         decoration: BoxDecoration(
-          color: AppColors.surfaceVariant,
+          color: AppColors.getSurfaceVariant(context),
           borderRadius: BorderRadius.circular(AppRadius.md),
         ),
         child: Center(
@@ -256,13 +256,13 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
               Icon(
                 Icons.shopping_cart_outlined,
                 size: 32,
-                color: AppColors.textTertiary,
+                color: AppColors.getTextSecondary(context),
               ),
               const SizedBox(height: AppSpacing.sm),
               Text(
                 'No items added',
                 style: AppTypography.bodyMedium.copyWith(
-                  color: AppColors.textSecondary,
+                  color: AppColors.getTextSecondary(context),
                 ),
               ),
             ],
@@ -275,9 +275,9 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
 
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: AppColors.getSurface(context),
         borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(color: AppColors.border),
+        border: Border.all(color: AppColors.getBorder(context)),
       ),
       child: Column(
         children: _items.asMap().entries.map((entry) {
@@ -323,7 +323,7 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
           style: isTotal
               ? AppTypography.titleMedium.copyWith(fontWeight: FontWeight.w600)
               : AppTypography.bodyMedium.copyWith(
-                  color: AppColors.textSecondary,
+                  color: AppColors.getTextSecondary(context),
                 ),
         ),
         Text(
@@ -348,7 +348,7 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
 
     showModalBottomSheet(
       context: context,
-      backgroundColor: AppColors.surface,
+      backgroundColor: AppColors.getSurface(context),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(AppRadius.lg)),
       ),
@@ -406,7 +406,7 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: AppColors.surface,
+      backgroundColor: AppColors.getSurface(context),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(AppRadius.lg)),
       ),

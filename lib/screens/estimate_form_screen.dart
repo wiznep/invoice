@@ -28,7 +28,7 @@ class _EstimateFormScreenState extends State<EstimateFormScreen> {
     final currencyFormat = NumberFormat.currency(symbol: '\$');
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      
       appBar: AppBar(title: const Text('New Estimate')),
       body: ListView(
         padding: const EdgeInsets.all(AppSpacing.md),
@@ -66,7 +66,7 @@ class _EstimateFormScreenState extends State<EstimateFormScreen> {
       child: Container(
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          color: AppColors.surfaceVariant,
+          color: AppColors.getSurfaceVariant(context),
           borderRadius: BorderRadius.circular(AppRadius.md),
         ),
         child: Row(
@@ -101,7 +101,7 @@ class _EstimateFormScreenState extends State<EstimateFormScreen> {
           Container(
             padding: const EdgeInsets.all(AppSpacing.lg),
             decoration: BoxDecoration(
-              color: AppColors.surfaceVariant,
+              color: AppColors.getSurfaceVariant(context),
               borderRadius: BorderRadius.circular(AppRadius.md),
             ),
             child: const Center(child: Text('No items added')),
@@ -136,7 +136,7 @@ class _EstimateFormScreenState extends State<EstimateFormScreen> {
       child: Container(
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          color: AppColors.surfaceVariant,
+          color: AppColors.getSurfaceVariant(context),
           borderRadius: BorderRadius.circular(AppRadius.md),
         ),
         child: Row(
@@ -154,8 +154,8 @@ class _EstimateFormScreenState extends State<EstimateFormScreen> {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.surface,
-        border: Border.all(color: AppColors.border),
+        color: AppColors.getSurface(context),
+        border: Border.all(color: AppColors.getBorder(context)),
         borderRadius: BorderRadius.circular(AppRadius.md),
       ),
       child: Row(

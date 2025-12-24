@@ -14,7 +14,7 @@ class ClientsScreen extends StatelessWidget {
     return Consumer<AppState>(
       builder: (context, appState, child) {
         return Scaffold(
-          backgroundColor: AppColors.background,
+          
           appBar: AppBar(
             title: const Text('Clients'),
             actions: [

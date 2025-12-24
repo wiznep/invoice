@@ -13,6 +13,8 @@ class BusinessSettings {
   final int nextEstimateNumber;
   final int defaultDueDays;
   final int defaultValidDays;
+  final String invoiceTemplate; // 'classic', 'modern', 'minimal'
+  final bool darkMode;
 
   BusinessSettings({
     this.businessName,
@@ -28,6 +30,8 @@ class BusinessSettings {
     this.nextEstimateNumber = 1,
     this.defaultDueDays = 30,
     this.defaultValidDays = 30,
+    this.invoiceTemplate = 'classic',
+    this.darkMode = false,
   });
 
   String get nextInvoiceNumberFormatted =>
@@ -51,6 +55,8 @@ class BusinessSettings {
       'nextEstimateNumber': nextEstimateNumber,
       'defaultDueDays': defaultDueDays,
       'defaultValidDays': defaultValidDays,
+      'invoiceTemplate': invoiceTemplate,
+      'darkMode': darkMode ? 1 : 0,
     };
   }
 
@@ -69,6 +75,8 @@ class BusinessSettings {
       nextEstimateNumber: map['nextEstimateNumber'] as int? ?? 1,
       defaultDueDays: map['defaultDueDays'] as int? ?? 30,
       defaultValidDays: map['defaultValidDays'] as int? ?? 30,
+      invoiceTemplate: map['invoiceTemplate'] as String? ?? 'classic',
+      darkMode: (map['darkMode'] as int? ?? 0) == 1,
     );
   }
 
@@ -86,6 +94,8 @@ class BusinessSettings {
     int? nextEstimateNumber,
     int? defaultDueDays,
     int? defaultValidDays,
+    String? invoiceTemplate,
+    bool? darkMode,
   }) {
     return BusinessSettings(
       businessName: businessName ?? this.businessName,
@@ -101,6 +111,8 @@ class BusinessSettings {
       nextEstimateNumber: nextEstimateNumber ?? this.nextEstimateNumber,
       defaultDueDays: defaultDueDays ?? this.defaultDueDays,
       defaultValidDays: defaultValidDays ?? this.defaultValidDays,
+      invoiceTemplate: invoiceTemplate ?? this.invoiceTemplate,
+      darkMode: darkMode ?? this.darkMode,
     );
   }
 }

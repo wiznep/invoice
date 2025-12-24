@@ -50,7 +50,7 @@ class _ClientFormScreenState extends State<ClientFormScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      
       appBar: AppBar(
         title: Text(isEditing ? 'Edit Client' : 'New Client'),
         actions: [
@@ -140,7 +140,7 @@ class _ClientFormScreenState extends State<ClientFormScreen> {
             Text(
               label,
               style: AppTypography.labelLarge.copyWith(
-                color: AppColors.textPrimary,
+                color: AppColors.getTextPrimary(context),
               ),
             ),
             if (required)

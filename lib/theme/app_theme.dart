@@ -22,14 +22,14 @@ class AppColors {
   static const Color partial = Color(0xFFF59E0B);
   static const Color overdue = Color(0xFFDC2626);
 
-  // Neutral colors
+  // Neutral colors (light mode defaults)
   static const Color background = Color(0xFFF8FAFC);
   static const Color surface = Color(0xFFFFFFFF);
   static const Color surfaceVariant = Color(0xFFF1F5F9);
   static const Color border = Color(0xFFE2E8F0);
   static const Color divider = Color(0xFFE2E8F0);
 
-  // Text colors
+  // Text colors (light mode defaults)
   static const Color textPrimary = Color(0xFF0F172A);
   static const Color textSecondary = Color(0xFF64748B);
   static const Color textTertiary = Color(0xFF94A3B8);
@@ -42,6 +42,33 @@ class AppColors {
   static const Color darkBorder = Color(0xFF475569);
   static const Color darkTextPrimary = Color(0xFFF8FAFC);
   static const Color darkTextSecondary = Color(0xFF94A3B8);
+
+  // Context-aware getters
+  static Color getBackground(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+      ? darkBackground
+      : background;
+
+  static Color getSurface(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark ? darkSurface : surface;
+
+  static Color getSurfaceVariant(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+      ? darkSurfaceVariant
+      : surfaceVariant;
+
+  static Color getBorder(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark ? darkBorder : border;
+
+  static Color getTextPrimary(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+      ? darkTextPrimary
+      : textPrimary;
+
+  static Color getTextSecondary(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+      ? darkTextSecondary
+      : textSecondary;
 }
 
 /// App typography
@@ -49,6 +76,7 @@ class AppTypography {
   static const String fontFamily = 'SF Pro Display';
 
   static const TextStyle displayLarge = TextStyle(
+    inherit: true,
     fontSize: 32,
     fontWeight: FontWeight.w700,
     letterSpacing: -0.5,
@@ -56,6 +84,7 @@ class AppTypography {
   );
 
   static const TextStyle displayMedium = TextStyle(
+    inherit: true,
     fontSize: 28,
     fontWeight: FontWeight.w600,
     letterSpacing: -0.3,
@@ -63,6 +92,7 @@ class AppTypography {
   );
 
   static const TextStyle headlineLarge = TextStyle(
+    inherit: true,
     fontSize: 24,
     fontWeight: FontWeight.w600,
     letterSpacing: -0.3,
@@ -70,6 +100,7 @@ class AppTypography {
   );
 
   static const TextStyle headlineMedium = TextStyle(
+    inherit: true,
     fontSize: 20,
     fontWeight: FontWeight.w600,
     letterSpacing: -0.2,
@@ -77,6 +108,7 @@ class AppTypography {
   );
 
   static const TextStyle titleLarge = TextStyle(
+    inherit: true,
     fontSize: 18,
     fontWeight: FontWeight.w600,
     letterSpacing: -0.1,
@@ -84,6 +116,7 @@ class AppTypography {
   );
 
   static const TextStyle titleMedium = TextStyle(
+    inherit: true,
     fontSize: 16,
     fontWeight: FontWeight.w500,
     letterSpacing: 0,
@@ -91,6 +124,7 @@ class AppTypography {
   );
 
   static const TextStyle bodyLarge = TextStyle(
+    inherit: true,
     fontSize: 16,
     fontWeight: FontWeight.w400,
     letterSpacing: 0,
@@ -98,6 +132,7 @@ class AppTypography {
   );
 
   static const TextStyle bodyMedium = TextStyle(
+    inherit: true,
     fontSize: 14,
     fontWeight: FontWeight.w400,
     letterSpacing: 0,
@@ -105,6 +140,7 @@ class AppTypography {
   );
 
   static const TextStyle bodySmall = TextStyle(
+    inherit: true,
     fontSize: 12,
     fontWeight: FontWeight.w400,
     letterSpacing: 0.1,
@@ -112,6 +148,7 @@ class AppTypography {
   );
 
   static const TextStyle labelLarge = TextStyle(
+    inherit: true,
     fontSize: 14,
     fontWeight: FontWeight.w500,
     letterSpacing: 0.1,
@@ -119,6 +156,7 @@ class AppTypography {
   );
 
   static const TextStyle labelMedium = TextStyle(
+    inherit: true,
     fontSize: 12,
     fontWeight: FontWeight.w500,
     letterSpacing: 0.2,
@@ -126,6 +164,7 @@ class AppTypography {
   );
 
   static const TextStyle labelSmall = TextStyle(
+    inherit: true,
     fontSize: 11,
     fontWeight: FontWeight.w500,
     letterSpacing: 0.3,
@@ -209,7 +248,6 @@ class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppRadius.md),
           ),
-          textStyle: AppTypography.labelLarge,
         ),
       ),
 
@@ -225,7 +263,6 @@ class AppTheme {
             borderRadius: BorderRadius.circular(AppRadius.md),
           ),
           side: const BorderSide(color: AppColors.primary),
-          textStyle: AppTypography.labelLarge,
         ),
       ),
 
@@ -236,7 +273,6 @@ class AppTheme {
             horizontal: AppSpacing.md,
             vertical: AppSpacing.sm,
           ),
-          textStyle: AppTypography.labelLarge,
         ),
       ),
 

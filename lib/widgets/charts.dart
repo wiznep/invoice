@@ -15,15 +15,15 @@ class RevenueChart extends StatelessWidget {
         height: 200,
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          color: AppColors.surface,
+          color: AppColors.getSurface(context),
           borderRadius: BorderRadius.circular(AppRadius.md),
-          border: Border.all(color: AppColors.border),
+          border: Border.all(color: AppColors.getBorder(context)),
         ),
         child: Center(
           child: Text(
             'No revenue data yet',
             style: AppTypography.bodyMedium.copyWith(
-              color: AppColors.textSecondary,
+              color: AppColors.getTextSecondary(context),
             ),
           ),
         ),
@@ -37,14 +37,19 @@ class RevenueChart extends StatelessWidget {
       height: 220,
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: AppColors.getSurface(context),
         borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(color: AppColors.border),
+        border: Border.all(color: AppColors.getBorder(context)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Monthly Revenue', style: AppTypography.titleMedium),
+          Text(
+            'Monthly Revenue',
+            style: AppTypography.titleMedium.copyWith(
+              color: AppColors.getTextPrimary(context),
+            ),
+          ),
           const SizedBox(height: AppSpacing.md),
           Expanded(
             child: BarChart(
@@ -77,7 +82,7 @@ class RevenueChart extends StatelessWidget {
                             child: Text(
                               entries[value.toInt()].key,
                               style: AppTypography.labelSmall.copyWith(
-                                color: AppColors.textSecondary,
+                                color: AppColors.getTextSecondary(context),
                               ),
                             ),
                           );
@@ -147,15 +152,15 @@ class PaymentStatusChart extends StatelessWidget {
         height: 180,
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          color: AppColors.surface,
+          color: AppColors.getSurface(context),
           borderRadius: BorderRadius.circular(AppRadius.md),
-          border: Border.all(color: AppColors.border),
+          border: Border.all(color: AppColors.getBorder(context)),
         ),
         child: Center(
           child: Text(
             'No invoices yet',
             style: AppTypography.bodyMedium.copyWith(
-              color: AppColors.textSecondary,
+              color: AppColors.getTextSecondary(context),
             ),
           ),
         ),
@@ -166,9 +171,9 @@ class PaymentStatusChart extends StatelessWidget {
       height: 180,
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: AppColors.getSurface(context),
         borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(color: AppColors.border),
+        border: Border.all(color: AppColors.getBorder(context)),
       ),
       child: Row(
         children: [
@@ -215,13 +220,28 @@ class PaymentStatusChart extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildLegendItem('Paid', paidCount, AppColors.paid),
+              _buildLegendItem(context, 'Paid', paidCount, AppColors.paid),
               const SizedBox(height: 6),
-              _buildLegendItem('Unpaid', unpaidCount, AppColors.unpaid),
+              _buildLegendItem(
+                context,
+                'Unpaid',
+                unpaidCount,
+                AppColors.unpaid,
+              ),
               const SizedBox(height: 6),
-              _buildLegendItem('Partial', partialCount, AppColors.partial),
+              _buildLegendItem(
+                context,
+                'Partial',
+                partialCount,
+                AppColors.partial,
+              ),
               const SizedBox(height: 6),
-              _buildLegendItem('Overdue', overdueCount, AppColors.overdue),
+              _buildLegendItem(
+                context,
+                'Overdue',
+                overdueCount,
+                AppColors.overdue,
+              ),
             ],
           ),
         ],
@@ -229,7 +249,12 @@ class PaymentStatusChart extends StatelessWidget {
     );
   }
 
-  Widget _buildLegendItem(String label, int count, Color color) {
+  Widget _buildLegendItem(
+    BuildContext context,
+    String label,
+    int count,
+    Color color,
+  ) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -242,7 +267,7 @@ class PaymentStatusChart extends StatelessWidget {
         Text(
           '$label ($count)',
           style: AppTypography.labelSmall.copyWith(
-            color: AppColors.textSecondary,
+            color: AppColors.getTextSecondary(context),
           ),
         ),
       ],

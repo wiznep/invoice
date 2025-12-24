@@ -23,9 +23,9 @@ class ClientCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          color: AppColors.surface,
+          color: AppColors.getSurface(context),
           borderRadius: BorderRadius.circular(AppRadius.md),
-          border: Border.all(color: AppColors.border),
+          border: Border.all(color: AppColors.getBorder(context)),
         ),
         child: Row(
           children: [
@@ -54,7 +54,7 @@ class ClientCard extends StatelessWidget {
                   Text(
                     client.name,
                     style: AppTypography.titleMedium.copyWith(
-                      color: AppColors.textPrimary,
+                      color: AppColors.getTextPrimary(context),
                     ),
                   ),
                   if (client.email != null && client.email!.isNotEmpty) ...[
@@ -62,14 +62,17 @@ class ClientCard extends StatelessWidget {
                     Text(
                       client.email!,
                       style: AppTypography.bodySmall.copyWith(
-                        color: AppColors.textSecondary,
+                        color: AppColors.getTextSecondary(context),
                       ),
                     ),
                   ],
                 ],
               ),
             ),
-            Icon(Icons.chevron_right, color: AppColors.textTertiary),
+            Icon(
+              Icons.chevron_right,
+              color: AppColors.getTextSecondary(context),
+            ),
           ],
         ),
       ),

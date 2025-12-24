@@ -15,14 +15,28 @@ class InvoiceApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => AppState()..initialize(),
-      child: MaterialApp(
-        title: 'Invoice',
-        debugShowCheckedModeBanner: false,
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
-        themeMode: ThemeMode.light,
-        home: const _AppLoader(),
-      ),
+      child: const _ThemedApp(),
+    );
+  }
+}
+
+class _ThemedApp extends StatelessWidget {
+  const _ThemedApp();
+
+  @override
+  Widget build(BuildContext context) {
+    return Selector<AppState, bool>(
+      selector: (_, state) => state.settings.darkMode,
+      builder: (context, isDarkMode, child) {
+        return MaterialApp(
+          title: 'Invoice',
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
+          home: const _AppLoader(),
+        );
+      },
     );
   }
 }
@@ -36,7 +50,6 @@ class _AppLoader extends StatelessWidget {
       builder: (context, appState, child) {
         if (appState.isLoading) {
           return Scaffold(
-            backgroundColor: AppColors.background,
             body: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -45,7 +58,7 @@ class _AppLoader extends StatelessWidget {
                     width: 80,
                     height: 80,
                     decoration: BoxDecoration(
-                      color: AppColors.primary,
+                      color: Theme.of(context).primaryColor,
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: const Icon(
@@ -57,9 +70,7 @@ class _AppLoader extends StatelessWidget {
                   const SizedBox(height: 24),
                   Text(
                     'Invoice',
-                    style: AppTypography.headlineLarge.copyWith(
-                      color: AppColors.textPrimary,
-                    ),
+                    style: Theme.of(context).textTheme.headlineLarge,
                   ),
                   const SizedBox(height: 32),
                   const CircularProgressIndicator(),

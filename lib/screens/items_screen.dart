@@ -14,7 +14,7 @@ class ItemsScreen extends StatelessWidget {
     return Consumer<AppState>(
       builder: (context, appState, child) {
         return Scaffold(
-          backgroundColor: AppColors.background,
+          
           appBar: AppBar(title: const Text('Products & Services')),
           body: appState.items.isEmpty
               ? EmptyState(
@@ -56,7 +56,7 @@ class ItemsScreen extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: AppColors.surface,
+      backgroundColor: AppColors.getSurface(context),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(AppRadius.lg)),
       ),
@@ -135,9 +135,9 @@ class _ItemCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          color: AppColors.surface,
+          color: AppColors.getSurface(context),
           borderRadius: BorderRadius.circular(AppRadius.md),
-          border: Border.all(color: AppColors.border),
+          border: Border.all(color: AppColors.getBorder(context)),
         ),
         child: Row(
           children: [
@@ -160,7 +160,7 @@ class _ItemCard extends StatelessWidget {
                     Text(
                       item.description!,
                       style: AppTypography.bodySmall.copyWith(
-                        color: AppColors.textSecondary,
+                        color: AppColors.getTextSecondary(context),
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,

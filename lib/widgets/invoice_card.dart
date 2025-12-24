@@ -28,9 +28,9 @@ class InvoiceCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          color: AppColors.surface,
+          color: AppColors.getSurface(context),
           borderRadius: BorderRadius.circular(AppRadius.md),
-          border: Border.all(color: AppColors.border),
+          border: Border.all(color: AppColors.getBorder(context)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,7 +42,7 @@ class InvoiceCard extends StatelessWidget {
                   child: Text(
                     invoice.invoiceNumber,
                     style: AppTypography.titleMedium.copyWith(
-                      color: AppColors.textPrimary,
+                      color: AppColors.getTextPrimary(context),
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -57,7 +57,7 @@ class InvoiceCard extends StatelessWidget {
             Text(
               invoice.clientName ?? 'Unknown Client',
               style: AppTypography.bodyMedium.copyWith(
-                color: AppColors.textSecondary,
+                color: AppColors.getTextSecondary(context),
               ),
             ),
             const SizedBox(height: AppSpacing.md),
@@ -72,7 +72,7 @@ class InvoiceCard extends StatelessWidget {
                       style: AppTypography.bodySmall.copyWith(
                         color: invoice.isOverdue
                             ? AppColors.overdue
-                            : AppColors.textTertiary,
+                            : AppColors.getTextSecondary(context),
                       ),
                     ),
                   ],
@@ -83,7 +83,7 @@ class InvoiceCard extends StatelessWidget {
                     Text(
                       currencyFormat.format(invoice.total),
                       style: AppTypography.titleMedium.copyWith(
-                        color: AppColors.textPrimary,
+                        color: AppColors.getTextPrimary(context),
                         fontWeight: FontWeight.w600,
                       ),
                     ),

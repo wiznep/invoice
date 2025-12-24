@@ -30,7 +30,6 @@ class InvoiceDetailScreen extends StatelessWidget {
         }
 
         return Scaffold(
-          backgroundColor: AppColors.background,
           appBar: AppBar(
             title: Text(invoice.invoiceNumber),
             actions: [
@@ -120,6 +119,7 @@ class InvoiceDetailScreen extends StatelessWidget {
 
                 // Client section
                 _buildSection(
+                  context,
                   title: 'Client',
                   child: Row(
                     children: [
@@ -159,6 +159,7 @@ class InvoiceDetailScreen extends StatelessWidget {
 
                 // Dates section
                 _buildSection(
+                  context,
                   title: 'Dates',
                   child: Column(
                     children: [
@@ -180,6 +181,7 @@ class InvoiceDetailScreen extends StatelessWidget {
 
                 // Items section
                 _buildSection(
+                  context,
                   title: 'Items',
                   child: Column(
                     children: invoice.items.map((item) {
@@ -199,7 +201,9 @@ class InvoiceDetailScreen extends StatelessWidget {
                                   Text(
                                     '${item.quantity} × ${currencyFormat.format(item.price)}',
                                     style: AppTypography.bodySmall.copyWith(
-                                      color: AppColors.textSecondary,
+                                      color: AppColors.getTextSecondary(
+                                        context,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -220,6 +224,7 @@ class InvoiceDetailScreen extends StatelessWidget {
 
                 // Summary section
                 _buildSection(
+                  context,
                   title: 'Summary',
                   child: Column(
                     children: [
@@ -260,11 +265,12 @@ class InvoiceDetailScreen extends StatelessWidget {
                 if (invoice.notes != null && invoice.notes!.isNotEmpty) ...[
                   const SizedBox(height: AppSpacing.md),
                   _buildSection(
+                    context,
                     title: 'Notes',
                     child: Text(
                       invoice.notes!,
                       style: AppTypography.bodyMedium.copyWith(
-                        color: AppColors.textSecondary,
+                        color: AppColors.getTextSecondary(context),
                       ),
                     ),
                   ),
@@ -292,13 +298,17 @@ class InvoiceDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSection({required String title, required Widget child}) {
+  Widget _buildSection(
+    BuildContext context, {
+    required String title,
+    required Widget child,
+  }) {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: AppColors.getSurface(context),
         borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(color: AppColors.border),
+        border: Border.all(color: AppColors.getBorder(context)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -306,7 +316,7 @@ class InvoiceDetailScreen extends StatelessWidget {
           Text(
             title,
             style: AppTypography.labelLarge.copyWith(
-              color: AppColors.textSecondary,
+              color: AppColors.getTextSecondary(context),
             ),
           ),
           const SizedBox(height: AppSpacing.md),
@@ -340,10 +350,28 @@ class InvoiceDetailScreen extends StatelessWidget {
     );
   }
 
+  InvoiceTemplate _getTemplateFromSettings(String templateName) {
+    switch (templateName) {
+      case 'modern':
+        return InvoiceTemplate.modern;
+      case 'minimal':
+        return InvoiceTemplate.minimal;
+      default:
+        return InvoiceTemplate.classic;
+    }
+  }
+
   void _shareInvoice(BuildContext context, Invoice invoice) async {
     try {
       final appState = context.read<AppState>();
-      await PdfService().shareInvoice(invoice, settings: appState.settings);
+      final template = _getTemplateFromSettings(
+        appState.settings.invoiceTemplate,
+      );
+      await PdfService().shareInvoice(
+        invoice,
+        settings: appState.settings,
+        template: template,
+      );
     } catch (e) {
       if (context.mounted) {
         ScaffoldMessenger.of(
@@ -361,7 +389,14 @@ class InvoiceDetailScreen extends StatelessWidget {
   ) {
     switch (action) {
       case 'print':
-        PdfService().printInvoice(invoice, settings: appState.settings);
+        final template = _getTemplateFromSettings(
+          appState.settings.invoiceTemplate,
+        );
+        PdfService().printInvoice(
+          invoice,
+          settings: appState.settings,
+          template: template,
+        );
         break;
       case 'edit':
         // Navigate to edit screen
@@ -421,7 +456,7 @@ class InvoiceDetailScreen extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: AppColors.surface,
+      backgroundColor: AppColors.getSurface(context),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(AppRadius.lg)),
       ),

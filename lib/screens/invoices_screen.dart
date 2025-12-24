@@ -36,13 +36,13 @@ class _InvoicesScreenState extends State<InvoicesScreen>
     return Consumer<AppState>(
       builder: (context, appState, child) {
         return Scaffold(
-          backgroundColor: AppColors.background,
+          
           appBar: AppBar(
             title: const Text('Invoices'),
             bottom: TabBar(
               controller: _tabController,
               labelColor: AppColors.primary,
-              unselectedLabelColor: AppColors.textSecondary,
+              unselectedLabelColor: AppColors.getTextSecondary(context),
               indicatorColor: AppColors.primary,
               tabs: [
                 Tab(text: 'All (${appState.invoices.length})'),

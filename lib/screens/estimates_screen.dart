@@ -15,7 +15,7 @@ class EstimatesScreen extends StatelessWidget {
     return Consumer<AppState>(
       builder: (context, appState, child) {
         return Scaffold(
-          backgroundColor: AppColors.background,
+          
           appBar: AppBar(title: const Text('Estimates')),
           body: appState.estimates.isEmpty
               ? EmptyState(
@@ -64,9 +64,9 @@ class _EstimateCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: AppColors.getSurface(context),
         borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(color: AppColors.border),
+        border: Border.all(color: AppColors.getBorder(context)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,7 +87,7 @@ class _EstimateCard extends StatelessWidget {
           Text(
             estimate.clientName ?? 'Unknown',
             style: AppTypography.bodyMedium.copyWith(
-              color: AppColors.textSecondary,
+              color: AppColors.getTextSecondary(context),
             ),
           ),
           const SizedBox(height: AppSpacing.md),
